@@ -427,7 +427,7 @@ public class LoanAssemblerImpl implements LoanAssembler {
         if (transactionProcessingStrategyCode.equals(AdvancedPaymentScheduleTransactionProcessor.ADVANCED_PAYMENT_ALLOCATION_STRATEGY)) {
             List<LoanPaymentAllocationRule> loanPaymentAllocationRules = loanProduct.getPaymentAllocationRules().stream()
                     .map(r -> new LoanPaymentAllocationRule(loanApplication, r.getTransactionType(), r.getAllocationTypes(),
-                            r.getFutureInstallmentAllocationRule()))
+                            r.getFutureInstallmentAllocationRule(), r.getProcessingDirection()))
                     .toList();
             List<LoanPaymentAllocationRule> paymentAllocationRules = loanApplication.getPaymentAllocationRules();
             paymentAllocationRules.clear();

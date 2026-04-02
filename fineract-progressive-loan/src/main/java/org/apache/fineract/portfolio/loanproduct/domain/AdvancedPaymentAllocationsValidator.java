@@ -75,6 +75,9 @@ public class AdvancedPaymentAllocationsValidator {
 
     public void checkGroupingOfAllocationRules(List<LoanProductPaymentAllocationRule> loanProductPaymentAllocationRules) {
         loanProductPaymentAllocationRules.forEach(paymentAllocationRule -> {
+            if (paymentAllocationRule.getProcessingDirection() != null) {
+                return;
+            }
             AtomicInteger pastDueRuleInteger = new AtomicInteger();
             AtomicInteger dueRuleInteger = new AtomicInteger();
             AtomicInteger inAdvanceRuleInteger = new AtomicInteger();

@@ -35,6 +35,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.fineract.infrastructure.core.domain.AbstractAuditableWithUTCDateTimeCustom;
+import org.apache.fineract.portfolio.loanaccount.loanschedule.domain.LoanScheduleProcessingType;
 
 @Getter
 @Setter
@@ -60,4 +61,12 @@ public class LoanProductPaymentAllocationRule extends AbstractAuditableWithUTCDa
     @Enumerated(EnumType.STRING)
     @Column(name = "future_installment_allocation_rule", nullable = false)
     private FutureInstallmentAllocationRule futureInstallmentAllocationRule;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "processing_direction", nullable = true)
+    private LoanScheduleProcessingType processingDirection;
+
+    public LoanScheduleProcessingType getEffectiveProcessingType(LoanProductRelatedDetail detail) {
+        return processingDirection != null ? processingDirection : detail.getLoanScheduleProcessingType();
+    }
 }

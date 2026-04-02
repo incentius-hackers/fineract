@@ -27,6 +27,7 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.fineract.infrastructure.core.api.JsonCommand;
+import org.apache.fineract.portfolio.loanaccount.loanschedule.domain.LoanScheduleProcessingType;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,7 @@ public class AdvancedPaymentAllocationsJsonParser {
                 populatePaymentAllocationRules(map, loanProductPaymentAllocationRule);
                 populateFutureInstallment(map, loanProductPaymentAllocationRule);
                 populateTransactionType(map, loanProductPaymentAllocationRule);
+                populateProcessingDirection(map, loanProductPaymentAllocationRule);
                 return loanProductPaymentAllocationRule;
             }).toList();
         }
@@ -76,6 +78,15 @@ public class AdvancedPaymentAllocationsJsonParser {
         if (transactionType != null) {
             loanProductPaymentAllocationRule
                     .setTransactionType(Enums.getIfPresent(PaymentAllocationTransactionType.class, transactionType).orNull());
+        }
+    }
+
+    private void populateProcessingDirection(Map<String, JsonElement> map,
+            LoanProductPaymentAllocationRule loanProductPaymentAllocationRule) {
+        String processingDirection = asStringOrNull(map.get("processingDirection"));
+        if (processingDirection != null) {
+            loanProductPaymentAllocationRule
+                    .setProcessingDirection(Enums.getIfPresent(LoanScheduleProcessingType.class, processingDirection).orNull());
         }
     }
 

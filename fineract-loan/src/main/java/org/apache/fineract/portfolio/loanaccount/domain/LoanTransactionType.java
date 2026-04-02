@@ -76,6 +76,7 @@ public enum LoanTransactionType {
     BUY_DOWN_FEE_ADJUSTMENT(41, "loanTransactionType.buyDownFeeAdjustment"), //
     BUY_DOWN_FEE_AMORTIZATION(42, "loanTransactionType.buyDownFeeAmortization"), //
     BUY_DOWN_FEE_AMORTIZATION_ADJUSTMENT(43, "loanTransactionType.buyDownFeeAmortizationAdjustment"), //
+    SETTLEMENT(44, "loanTransactionType.settlement"), //
     ;
 
     private final Integer value;
@@ -135,6 +136,7 @@ public enum LoanTransactionType {
             case 41 -> LoanTransactionType.BUY_DOWN_FEE_ADJUSTMENT;
             case 42 -> LoanTransactionType.BUY_DOWN_FEE_AMORTIZATION;
             case 43 -> LoanTransactionType.BUY_DOWN_FEE_AMORTIZATION_ADJUSTMENT;
+            case 44 -> LoanTransactionType.SETTLEMENT;
             default -> LoanTransactionType.INVALID;
         };
     }
@@ -179,9 +181,13 @@ public enum LoanTransactionType {
         return this.equals(LoanTransactionType.CHARGE_REFUND);
     }
 
+    public boolean isSettlement() {
+        return this.equals(LoanTransactionType.SETTLEMENT);
+    }
+
     public boolean isRepaymentType() {
         return (isRepayment() || isMerchantIssuedRefund() || isPayoutRefund() || isGoodwillCredit() || isChargeRefund() || isDownPayment()
-                || isInterestPaymentWaiver());
+                || isInterestPaymentWaiver() || isSettlement());
     }
 
     public boolean isRecoveryRepayment() {

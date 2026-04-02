@@ -54,6 +54,8 @@ import org.apache.fineract.infrastructure.event.business.domain.loan.transaction
 import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionDownPaymentPreBusinessEvent;
 import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionGoodwillCreditPostBusinessEvent;
 import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionGoodwillCreditPreBusinessEvent;
+import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionSettlementPreBusinessEvent;
+import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionSettlementPostBusinessEvent;
 import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionInterestPaymentWaiverPostBusinessEvent;
 import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionInterestPaymentWaiverPreBusinessEvent;
 import org.apache.fineract.infrastructure.event.business.domain.loan.transaction.LoanTransactionInterestRefundPostBusinessEvent;
@@ -341,6 +343,8 @@ public class LoanAccountDomainServiceJpa implements LoanAccountDomainService {
             repaymentEvent = new LoanTransactionPayoutRefundPreBusinessEvent(loan);
         } else if (repaymentTransactionType.isGoodwillCredit()) {
             repaymentEvent = new LoanTransactionGoodwillCreditPreBusinessEvent(loan);
+        } else if (repaymentTransactionType.isSettlement()) {
+            repaymentEvent = new LoanTransactionSettlementPreBusinessEvent(loan);
         } else if (repaymentTransactionType.isInterestPaymentWaiver()) {
             repaymentEvent = new LoanTransactionInterestPaymentWaiverPreBusinessEvent(loan);
         } else if (repaymentTransactionType.isChargeRefund()) {
@@ -366,6 +370,8 @@ public class LoanAccountDomainServiceJpa implements LoanAccountDomainService {
             repaymentEvent = new LoanTransactionPayoutRefundPostBusinessEvent(transaction);
         } else if (repaymentTransactionType.isGoodwillCredit()) {
             repaymentEvent = new LoanTransactionGoodwillCreditPostBusinessEvent(transaction);
+        } else if (repaymentTransactionType.isSettlement()) {
+            repaymentEvent = new LoanTransactionSettlementPostBusinessEvent(transaction);
         } else if (repaymentTransactionType.isInterestPaymentWaiver()) {
             repaymentEvent = new LoanTransactionInterestPaymentWaiverPostBusinessEvent(transaction);
         } else if (repaymentTransactionType.isChargeRefund()) {

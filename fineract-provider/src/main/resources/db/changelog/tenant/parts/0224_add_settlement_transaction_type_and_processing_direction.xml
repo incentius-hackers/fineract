@@ -25,6 +25,9 @@
 
     <!-- Add per-rule processing direction override to loan product payment allocation rules -->
     <changeSet author="fineract" id="1">
+        <preConditions onFail="MARK_RAN">
+            <not><columnExists tableName="m_loan_product_payment_allocation_rule" columnName="processing_direction"/></not>
+        </preConditions>
         <addColumn tableName="m_loan_product_payment_allocation_rule">
             <column name="processing_direction" type="VARCHAR(20)">
                 <constraints nullable="true"/>
@@ -34,6 +37,9 @@
 
     <!-- Add per-rule processing direction override to loan payment allocation rules -->
     <changeSet author="fineract" id="2">
+        <preConditions onFail="MARK_RAN">
+            <not><columnExists tableName="m_loan_payment_allocation_rule" columnName="processing_direction"/></not>
+        </preConditions>
         <addColumn tableName="m_loan_payment_allocation_rule">
             <column name="processing_direction" type="VARCHAR(20)">
                 <constraints nullable="true"/>
@@ -43,6 +49,9 @@
 
     <!-- Add permissions for the new SETTLEMENT transaction type -->
     <changeSet author="fineract" id="3">
+        <preConditions onFail="MARK_RAN">
+            <not><sqlCheck expectedResult="1">SELECT COUNT(*) FROM m_permission WHERE code = 'SETTLEMENT_LOAN'</sqlCheck></not>
+        </preConditions>
         <insert tableName="m_permission">
             <column name="grouping" value="transaction_loan"/>
             <column name="code" value="SETTLEMENT_LOAN"/>
@@ -54,6 +63,9 @@
 
     <!-- Add business event configuration for Settlement -->
     <changeSet author="fineract" id="4">
+        <preConditions onFail="MARK_RAN">
+            <not><sqlCheck expectedResult="1">SELECT COUNT(*) FROM m_external_event_configuration WHERE type = 'LoanTransactionSettlementPreBusinessEvent'</sqlCheck></not>
+        </preConditions>
         <insert tableName="m_external_event_configuration">
             <column name="type" value="LoanTransactionSettlementPreBusinessEvent"/>
             <column name="enabled" valueBoolean="false"/>

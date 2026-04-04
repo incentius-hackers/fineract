@@ -75,7 +75,8 @@ public class AdvancedPaymentAllocationsValidator {
 
     public void checkGroupingOfAllocationRules(List<LoanProductPaymentAllocationRule> loanProductPaymentAllocationRules) {
         loanProductPaymentAllocationRules.forEach(paymentAllocationRule -> {
-            if (paymentAllocationRule.getProcessingDirection() != null) {
+            // Skip validation for rules with non-HORIZONTAL processingDirection (e.g., VERTICAL settlement rules)
+            if (!paymentAllocationRule.getProcessingDirection().isHorizontal()) {
                 return;
             }
             AtomicInteger pastDueRuleInteger = new AtomicInteger();

@@ -83,10 +83,15 @@ public class AdvancedPaymentAllocationsJsonParser {
 
     private void populateProcessingDirection(Map<String, JsonElement> map,
             LoanProductPaymentAllocationRule loanProductPaymentAllocationRule) {
-        String processingDirection = asStringOrNull(map.get("processingDirection"));
+        JsonElement dirElement = map.get("processingDirection");
+        String processingDirection = dirElement != null ? asStringOrNull(dirElement) : null;
         if (processingDirection != null) {
             loanProductPaymentAllocationRule
                     .setProcessingDirection(Enums.getIfPresent(LoanScheduleProcessingType.class, processingDirection).orNull());
+        }
+        // Default to HORIZONTAL when not provided (Mifos UI doesn't send this field)
+        if (loanProductPaymentAllocationRule.getProcessingDirection() == null) {
+            loanProductPaymentAllocationRule.setProcessingDirection(LoanScheduleProcessingType.HORIZONTAL);
         }
     }
 

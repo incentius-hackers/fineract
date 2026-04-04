@@ -39,6 +39,7 @@
             <column name="future_installment_allocation_rule" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="processing_direction" type="VARCHAR(20)"/>
             <column name="created_by" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -62,6 +63,7 @@
             <column name="future_installment_allocation_rule" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="processing_direction" type="VARCHAR(20)"/>
             <column name="created_by" type="BIGINT">
                 <constraints nullable="false"/>
             </column>

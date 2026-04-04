@@ -26,7 +26,10 @@
     <!-- Add per-rule processing direction override to loan product payment allocation rules -->
     <changeSet author="fineract" id="1">
         <preConditions onFail="MARK_RAN">
-            <not><columnExists tableName="m_loan_product_payment_allocation_rule" columnName="processing_direction"/></not>
+            <and>
+                <tableExists tableName="m_loan_product_payment_allocation_rule"/>
+                <not><columnExists tableName="m_loan_product_payment_allocation_rule" columnName="processing_direction"/></not>
+            </and>
         </preConditions>
         <addColumn tableName="m_loan_product_payment_allocation_rule">
             <column name="processing_direction" type="VARCHAR(20)">
@@ -38,7 +41,10 @@
     <!-- Add per-rule processing direction override to loan payment allocation rules -->
     <changeSet author="fineract" id="2">
         <preConditions onFail="MARK_RAN">
-            <not><columnExists tableName="m_loan_payment_allocation_rule" columnName="processing_direction"/></not>
+            <and>
+                <tableExists tableName="m_loan_payment_allocation_rule"/>
+                <not><columnExists tableName="m_loan_payment_allocation_rule" columnName="processing_direction"/></not>
+            </and>
         </preConditions>
         <addColumn tableName="m_loan_payment_allocation_rule">
             <column name="processing_direction" type="VARCHAR(20)">

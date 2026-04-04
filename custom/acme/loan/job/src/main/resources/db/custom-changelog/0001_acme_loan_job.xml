@@ -40,7 +40,6 @@
             <column name="is_misfired" valueBoolean="false"/>
             <column name="node_id" valueNumeric="1"/>
             <column name="is_mismatched_job" valueBoolean="true"/>
-            <column name="short_name" value="ACM_NOOP"/>
         </insert>
     </changeSet>
     <changeSet author="acme" id="2">

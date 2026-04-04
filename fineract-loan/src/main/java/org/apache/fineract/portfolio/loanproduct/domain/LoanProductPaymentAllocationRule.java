@@ -63,8 +63,8 @@ public class LoanProductPaymentAllocationRule extends AbstractAuditableWithUTCDa
     private FutureInstallmentAllocationRule futureInstallmentAllocationRule;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "processing_direction", nullable = true)
-    private LoanScheduleProcessingType processingDirection;
+    @Column(name = "processing_direction")
+    private LoanScheduleProcessingType processingDirection = LoanScheduleProcessingType.HORIZONTAL;
 
     public LoanScheduleProcessingType getEffectiveProcessingType(LoanProductRelatedDetail detail) {
         return processingDirection != null ? processingDirection : detail.getLoanScheduleProcessingType();

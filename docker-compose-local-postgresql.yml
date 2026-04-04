@@ -1,0 +1,22 @@
+# Custom docker-compose for using LOCAL PostgreSQL databases
+# (fineract_default and fineract_tenants running on host machine)
+#
+# Usage:
+#   docker compose -f docker-compose-local-postgresql.yml up -d
+#
+
+services:
+
+  fineract:
+    extends:
+      file: ./config/docker/compose/fineract.yml
+      service: fineract
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8443:8443"
+      - "5000:5000"
+    env_file:
+      - ./config/docker/env/fineract.env
+      - ./config/docker/env/fineract-common.env
+      - ./config/docker/env/fineract-local-postgresql.env

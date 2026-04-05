@@ -89,6 +89,11 @@ public class LoanProductPaymentAllocationRuleMerger {
             changed = true;
         }
 
+        if (!Objects.equals(into.getProcessingDirection(), newElement.getProcessingDirection())) {
+            into.setProcessingDirection(newElement.getProcessingDirection());
+            changed = true;
+        }
+
         return changed;
     }
 }

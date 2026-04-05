@@ -646,12 +646,12 @@ public class LoanTransaction extends AbstractAuditableWithUTCDateTimeCustom<Long
     public boolean isRepaymentLikeType() {
         return isRepayment() || isMerchantIssuedRefund() || isPayoutRefund() || isGoodwillCredit() || isChargeRefund()
                 || isChargeAdjustment() || isDownPayment() || isInterestPaymentWaiver() || isInterestRefund()
-                || isCapitalizedIncomeAdjustment();
+                || isCapitalizedIncomeAdjustment() || isSettlement();
     }
 
     public boolean isTypeAllowedForChargeback() {
         return isRepayment() || isMerchantIssuedRefund() || isPayoutRefund() || isGoodwillCredit() || isDownPayment()
-                || isInterestPaymentWaiver();
+                || isInterestPaymentWaiver() || isSettlement();
     }
 
     public boolean isRepayment() {
@@ -672,6 +672,10 @@ public class LoanTransaction extends AbstractAuditableWithUTCDateTimeCustom<Long
 
     public boolean isGoodwillCredit() {
         return LoanTransactionType.GOODWILL_CREDIT.equals(getTypeOf()) && isNotReversed();
+    }
+
+    public boolean isSettlement() {
+        return LoanTransactionType.SETTLEMENT.equals(getTypeOf()) && isNotReversed();
     }
 
     public boolean isInterestPaymentWaiver() {
@@ -763,7 +767,7 @@ public class LoanTransaction extends AbstractAuditableWithUTCDateTimeCustom<Long
     }
 
     public boolean isEditable() {
-        return !(isChargeback() || isGoodwillCredit() || isPayoutRefund() || isMerchantIssuedRefund());
+        return !(isChargeback() || isGoodwillCredit() || isPayoutRefund() || isMerchantIssuedRefund() || isSettlement());
     }
 
     public boolean isPenaltyPayment() {

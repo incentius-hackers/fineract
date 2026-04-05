@@ -577,7 +577,7 @@ public class CashBasedAccountingProcessorForLoan implements AccountingProcessorF
                 populateCreditDebitMaps(loanProductId, principalAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.GOODWILL_CREDIT.getValue(), glAccountBalanceHolder);
 
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, principalAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.FUND_SOURCE.getValue(), glAccountBalanceHolder);
 
@@ -604,7 +604,7 @@ public class CashBasedAccountingProcessorForLoan implements AccountingProcessorF
             } else if (loanTransactionDTO.getTransactionType().isGoodwillCredit()) {
                 populateCreditDebitMaps(loanProductId, interestAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.INCOME_FROM_GOODWILL_CREDIT_INTEREST.getValue(), glAccountBalanceHolder);
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, interestAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.FUND_SOURCE.getValue(), glAccountBalanceHolder);
 
@@ -632,7 +632,7 @@ public class CashBasedAccountingProcessorForLoan implements AccountingProcessorF
                 populateCreditDebitMaps(loanProductId, feesAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.INCOME_FROM_GOODWILL_CREDIT_FEES.getValue(), glAccountBalanceHolder);
 
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, feesAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.FUND_SOURCE.getValue(), glAccountBalanceHolder);
 
@@ -660,7 +660,7 @@ public class CashBasedAccountingProcessorForLoan implements AccountingProcessorF
                 populateCreditDebitMaps(loanProductId, penaltiesAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.INCOME_FROM_GOODWILL_CREDIT_PENALTY.getValue(), glAccountBalanceHolder);
 
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, penaltiesAmount, paymentTypeId, CashAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         CashAccountsForLoan.FUND_SOURCE.getValue(), glAccountBalanceHolder);
 

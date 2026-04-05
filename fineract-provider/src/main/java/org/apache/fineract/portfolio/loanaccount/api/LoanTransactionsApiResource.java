@@ -533,6 +533,7 @@ public class LoanTransactionsApiResource {
             case merchantIssuedRefund -> LoanTransactionType.MERCHANT_ISSUED_REFUND;
             case payoutRefund -> LoanTransactionType.PAYOUT_REFUND;
             case goodwillCredit -> LoanTransactionType.GOODWILL_CREDIT;
+            case settlement -> LoanTransactionType.SETTLEMENT;
             case chargeRefund -> LoanTransactionType.CHARGE_REFUND;
             case chargeback -> LoanTransactionType.CHARGEBACK;
             case chargeAdjustment -> LoanTransactionType.CHARGE_ADJUSTMENT;
@@ -571,6 +572,8 @@ public class LoanTransactionsApiResource {
             commandRequest = builder.loanPayoutRefundTransaction(resolvedLoanId).build();
         } else if (CommandParameterUtil.is(commandParam, "goodwillCredit")) {
             commandRequest = builder.loanGoodwillCreditTransaction(resolvedLoanId).build();
+        } else if (CommandParameterUtil.is(commandParam, "settlement")) {
+            commandRequest = builder.loanSettlementTransaction(resolvedLoanId).build();
         } else if (CommandParameterUtil.is(commandParam, "interestPaymentWaiver")) {
             commandRequest = builder.loanInterestPaymentWaiverTransaction(resolvedLoanId).build();
         } else if (CommandParameterUtil.is(commandParam, "chargeRefund")) {
@@ -642,6 +645,10 @@ public class LoanTransactionsApiResource {
         } else if (CommandParameterUtil.is(commandParam, "goodwillCredit")) {
             LocalDate transactionDate = DateUtils.getBusinessLocalDate();
             transactionData = this.loanReadPlatformService.retrieveLoanPrePaymentTemplate(LoanTransactionType.GOODWILL_CREDIT,
+                    resolvedLoanId, transactionDate);
+        } else if (CommandParameterUtil.is(commandParam, "settlement")) {
+            LocalDate transactionDate = DateUtils.getBusinessLocalDate();
+            transactionData = this.loanReadPlatformService.retrieveLoanPrePaymentTemplate(LoanTransactionType.SETTLEMENT,
                     resolvedLoanId, transactionDate);
         } else if (CommandParameterUtil.is(commandParam, "interestPaymentWaiver")) {
             LocalDate transactionDate = DateUtils.getBusinessLocalDate();

@@ -1401,7 +1401,7 @@ public class AccrualBasedAccountingProcessorForLoan implements AccountingProcess
                 populateCreditDebitMaps(loanProductId, principalAmount, paymentTypeId,
                         AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(), AccrualAccountsForLoan.GOODWILL_CREDIT.getValue(),
                         glAccountBalanceHolder);
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, principalAmount, paymentTypeId,
                         AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(), AccrualAccountsForLoan.FUND_SOURCE.getValue(),
                         glAccountBalanceHolder);
@@ -1430,7 +1430,7 @@ public class AccrualBasedAccountingProcessorForLoan implements AccountingProcess
                         AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         AccrualAccountsForLoan.INCOME_FROM_GOODWILL_CREDIT_INTEREST.getValue(), glAccountBalanceHolder);
 
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, interestAmount, paymentTypeId,
                         AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(), AccrualAccountsForLoan.FUND_SOURCE.getValue(),
                         glAccountBalanceHolder);
@@ -1459,7 +1459,7 @@ public class AccrualBasedAccountingProcessorForLoan implements AccountingProcess
                 populateCreditDebitMaps(loanProductId, feesAmount, paymentTypeId, AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         AccrualAccountsForLoan.INCOME_FROM_GOODWILL_CREDIT_FEES.getValue(), glAccountBalanceHolder);
 
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, feesAmount, paymentTypeId, AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         AccrualAccountsForLoan.FUND_SOURCE.getValue(), glAccountBalanceHolder);
 
@@ -1498,7 +1498,7 @@ public class AccrualBasedAccountingProcessorForLoan implements AccountingProcess
                         AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(),
                         AccrualAccountsForLoan.INCOME_FROM_GOODWILL_CREDIT_PENALTY.getValue(), glAccountBalanceHolder);
 
-            } else if (loanTransactionDTO.getTransactionType().isRepayment()) {
+            } else if (loanTransactionDTO.getTransactionType().isRepayment() || loanTransactionDTO.getTransactionType().isSettlement()) {
                 populateCreditDebitMaps(loanProductId, penaltiesAmount, paymentTypeId,
                         AccrualAccountsForLoan.INCOME_FROM_RECOVERY.getValue(), AccrualAccountsForLoan.FUND_SOURCE.getValue(),
                         glAccountBalanceHolder);
